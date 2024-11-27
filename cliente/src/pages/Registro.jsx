@@ -5,7 +5,7 @@ const[nome, setNome] = useState([]);
 
 const[email, setEmail] = useState([]);
 
-const registrar = async(event)=> {
+const registrar = async (event)=> {
   event.preventDefault();
 
   try{
@@ -24,18 +24,31 @@ const registrar = async(event)=> {
 
 return (
      <main>
-<form action="">
-<input
+<form onSubit={registrar}>
+  <div>
+  <label htmlFor="nome">Nome:</label>
+  <input
 type="text"
 value={nome}
 onChange={(event)=>setNome(event.target.value)}/>
-<input
-type="email"
-value={email}
-onChange={(event)=>setEmail(event.target.value)}/>
+  </div>
+
+  <div>
+    <label htmlFor="email">E-mail:</label>
+    <input
+    type="email"
+    id="email"
+    value={email}
+    onChange={(event) => {setEmail(event.target.value)}}
+    placeholder="Digite seu e-mail"
+          
+          />
+        </div>
+
+        <button type="submit">Registrar</button>
+
 
 </form>
-
      </main>   
   );
 }
