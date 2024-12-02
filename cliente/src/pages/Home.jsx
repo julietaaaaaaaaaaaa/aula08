@@ -15,8 +15,20 @@ export default function Home() {
       }
     }
     buscarUsuario();
-  }, [])
+}, [usuarios])
 
+const deletar = async(id)=>{
+  try{
+    awaitfetch ('http://localhost:3000/usuarios'+id,{
+      method:'DELETE'
+    });
+
+  }catch{
+alert("Ish lascou!");
+
+  }
+
+}
   return (
     <table>
       <tr>
@@ -27,6 +39,7 @@ export default function Home() {
         <tr key={usuario.id}>
           <td>{usuario.nome}</td>
           <td>{usuario.email}</td>
+          <td><button onClick={()=> deletar(usuario.id)}>x</button></td>
         </tr>
       )}
     </table>
