@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+import {jsPDF} from "jspdf";
+import "jspdf-autotable";
+import {Button} from '@mui/material';
+
 
 export default function Home() {
 
@@ -19,7 +23,7 @@ export default function Home() {
 
 const deletar = async(id)=>{
   try{
-    awaitfetch ('http://localhost:3000/usuarios'+id,{
+    awaitfetch ('http://localhost:3000/usuarios'+ id,{
       method:'DELETE'
     });
 
@@ -29,7 +33,25 @@ alert("Ish lascou!");
   }
 
 }
+const exportarPDF = ()=>{
+  const doc = new jsPDF();
+  const tabelaDados = usuarios.map((usuario)=>[
+    usuario.id,
+    usuario.nome,
+    usuario.email,
+  ]);
+  doc.text("lista de usuários", 10, 10);
+  doc.autoTable({
+    head:[["id","nome", "e-mail"]],
+    body:tabelaDados,
+  });
+  doc.save("alunosIFMS.pdf");
+};
   return (
+    <>
+    <Button variant="contained"onClick={()=> exportarPDF()}>
+      gerar pdf
+      </Button>
     <table>
       <tr>
         <td>Nome</td>
@@ -43,5 +65,6 @@ alert("Ish lascou!");
         </tr>
       )}
     </table>
+    </>
   );
 }

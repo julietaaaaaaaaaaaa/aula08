@@ -13,7 +13,7 @@ const registrar = async (event)=> {
   event.preventDefault();
 
   try{
-    await fetch('http://localhost:3000/usuarios',{
+    const resposta= await fetch('http://localhost:3000/usuarios',{
       method: 'POST',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
@@ -48,11 +48,8 @@ onChange={(event)=>setNome(event.target.value)}/>
     id="email"
     value={email}
     onChange={(event) => {setEmail(event.target.value)}}
-    placeholder="Digite seu e-mail"
-          
-          />
+    placeholder="Digite seu e-mail"/>
         </div>
-
         <button type="submit">Registrar</button>
 
 
